@@ -1,0 +1,2 @@
+Vue Component:
+    like customizing a HTML element to encapsulate reusable code.
