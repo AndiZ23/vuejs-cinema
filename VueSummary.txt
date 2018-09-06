@@ -1,2 +1,6 @@
 Vue Component:
     like customizing a HTML element to encapsulate reusable code.
+    1. Register components - templates, data, etc ...
+    2. Put the customized element (the template) into html.
+    * Compoents can have many Vue properties, including data, methods, and even components.
+    !! Note that the data properties should be assigned a function that returns an object.
