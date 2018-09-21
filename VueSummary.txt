@@ -4,3 +4,11 @@ Vue Component:
     2. Put the customized element (the template) into html.
     * Compoents can have many Vue properties, including data, methods, and even components.
     !! Note that the data properties should be assigned a function that returns an object.
+
+    template: -- what this component's gonna be rendered as HTML
+    props: -- attributes in the html tag, children dom can access the value too
+           -- props value can be dynamic, parent dom change the value and children get the change too.
+                -- note: the change can only be passing down, not the other way
+
+Custom events in Vue Component:
+    A way that parent can listen to the child (listen the child for the event and parent capture it).
