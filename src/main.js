@@ -4,6 +4,22 @@ import genres from './util/genres';
 
 new Vue({
     el: '#app',
+    data: {
+        genre: [],
+        time: []
+    },
+    methods: {
+        checkFilter(category, title, checked){ // this one will be fired when the checkFilter from the very child comp. is triggered.
+            if(checked){
+                this[category].push(title);
+            } else {
+                let index = this[category].indexOf(title);
+                if (index > -1){
+                    this[category].splice(index, 1);
+                }
+            }
+        }
+    },
     components: { // registering Vue components, can have many properties of Vue
         'movie-list': {
             template: `<div id="movie-list">
@@ -32,8 +48,11 @@ new Vue({
                             </div>
                         </div>`,
             methods: {
-                checkFilter(){ // when the actual check-filter checkbox is clicked
+                checkFilter(category, title, checked){ // Triggers when the actual check-filter checkbox is clicked
+                    // In depth: when the check-filter's checkFilter event is triggered, the movie-filter (parent) triggers this event
+                    // method too. Likewise, the root element (parent of this comp) listens to / receive this event too.
                     console.log('check filter');
+                    this.$emit('check-filter', category, title, checked);
                 }
             },
             components: { // components inside a component
@@ -51,7 +70,7 @@ new Vue({
                     methods: { // put custom events under methods
                         checkFilter(){
                             this.checked = !this.checked;
-                            this.$emit('check-filter');
+                            this.$emit('check-filter', 'genre', this.title, this.checked);
                         }
                     }
                 }
