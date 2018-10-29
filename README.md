@@ -43,7 +43,10 @@ See the completed project here: [http://vuejs-cinema.vuejsdevelopers.com/](http:
     ```
     cp .env_sample .env
     ```
-    
+    or in Windows
+    ```
+    copy .env_sample .env
+    ```
     Edit the .env file and replace any variables if needed
     
 5. Start project
