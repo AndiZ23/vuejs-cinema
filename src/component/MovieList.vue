@@ -12,8 +12,16 @@
             moviePassesGenreFilter(movie){
                 if (!this.genre.length)
                     return true;
-                else
-                    return this.genre.find(genre => movie.genre === genre);
+                else {
+                    let movieGenres = movie.movie.Genre.split(", ");
+                    let matched = true;
+                    this.genre.forEach(genre => {
+                       if (movieGenres.indexOf(genre) === -1) {
+                           matched = false;
+                       }
+                    });
+                    return matched;
+                }
             }
         },
         computed: {
