@@ -12,11 +12,11 @@
                 checked: false
             }
         },
-        props: ['title'],
+        props: ['title', 'category'],
         methods: { // put custom events under methods
             checkFilter(){ // point of creating an event: changing and passing data upward.
                 this.checked = !this.checked;
-                this.$emit('check-filter', 'genre', this.title, this.checked);
+                this.$emit('check-filter', this.category, this.title, this.checked);
             }
         }
     }
