@@ -39,6 +39,9 @@
         },
         components: {
             MovieItem
+        },
+        created() {
+            console.log(this.$moment);
         }
     }
 </script>
