@@ -16,28 +16,42 @@
 </template>
 <script>
     import genres from '../util/genres';
+    import times from '../util/times';
     import MovieItem from './MovieItem.vue';
     export default {
         props: ['genre', 'time', 'movies', 'day'], // refer to the parent's data properties, and can be used in this child component.
         methods: {
-            moviePassesGenreFilter(movie){
+            moviePassesGenreFilter(movie) {
                 if (!this.genre.length)
                     return true;
                 else {
                     let movieGenres = movie.movie.Genre.split(", ");
                     let matched = true;
                     this.genre.forEach(genre => {
-                       if (movieGenres.indexOf(genre) === -1) {
-                           matched = false;
-                       }
+                        if (movieGenres.indexOf(genre) === -1) {
+                            matched = false;
+                        }
                     });
                     return matched;
                 }
+            },
+            sessionPassesTimeFilter(session) {
+
+                if (!this.day.isSame(this.$moment(session.time), 'day')) // if session is not on today, false
+                    return false;
+                else if (this.time.length === 0 || this.time.length === 2) // either select none or both
+                    return true;
+                else if (this.time[0] === times.AFTER_6PM)
+                    return this.$moment(session.time).hour() >= 18;
+                else
+                    return this.$moment(session.time).hour() < 18;
             }
         },
         computed: {
             filteredMovies() {
-                return this.movies.filter(this.moviePassesGenreFilter);
+                return this.movies
+                    .filter(this.moviePassesGenreFilter)
+                    .filter(movie => movie.sessions.find(this.sessionPassesTimeFilter));
             }
         },
         components: {
