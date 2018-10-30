@@ -10,7 +10,7 @@ Vue.use(VueResource);
 //Adding moment-timezone lib
 import moment from 'moment-timezone';
 moment.tz.setDefault("UTC");
-Object.defineProperty(Vue.prototype, '$moment', {get() { return this.$root.moment}}); // a method to add an existing property into all vue objects.
+Object.defineProperty(Vue.prototype, '$moment', { get() { return this.$root.moment} }); // a method to add an existing property into all vue objects.
 
 new Vue({
     el: '#app',
@@ -18,7 +18,8 @@ new Vue({
         genre: [],
         time: [],
         movies: [],
-        moment
+        moment,
+        day: moment()
     },
     methods: { // put v-on:check-filter="checkFilter" into <movie-filter> in HTML, so this root element can listen to the event too.
         checkFilter(category, title, checked){ // this one will be fired when the checkFilter from the very child comp is triggered.
