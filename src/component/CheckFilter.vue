@@ -17,6 +17,8 @@
             checkFilter(){ // point of creating an event: changing and passing data upward.
                 this.checked = !this.checked;
                 this.$emit('check-filter', this.category, this.title, this.checked);
+                // emits the custom event 'check-filter'
+                // the following params are the "payloads", which is how the data is passed to the parent nodes. 
             }
         }
     }
